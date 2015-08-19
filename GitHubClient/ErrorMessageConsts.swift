@@ -17,4 +17,6 @@ struct ErrorMessageConsts {
   static let noAuthorization = "Access denied by server. Please verify your account."
   static let busyOrServerError = "Service is unavailable. Please try again later."
   static let noNewData = "No new data. Please try again later."
+  static let nsURLSessionError = "Internal error in NSURLSession.sharedSession():dataTaskWithURL. Please try again later."
+  static let nsJSONSerializationError = "Internal error in NSJSONSerialization.JSONObjectWithData. Please try again later."
 }

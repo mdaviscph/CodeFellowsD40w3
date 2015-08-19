@@ -17,6 +17,7 @@ class RepositoryCell: UITableViewCell {
       }
     }
   }
+  
   @IBOutlet weak var bodyLabel: UILabel!
   
   override func setSelected(selected: Bool, animated: Bool) {

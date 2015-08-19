@@ -10,37 +10,28 @@ import UIKit
 
 class GitHubService {
   
-  class func repositoriesForSearchTerm(searchTerm: String, controller: RepositorySearchViewController) {
+  // completion hander probably executed in background queue
+  class func repositoriesForSearchTerm(searchTerm: String, completion: (NSData?, Int?, NSError?) -> Void) {
     let okHTTPStatusCodeRange = 200...203
     let searchURL = self.searchURL(scheme: StringConsts.schemeProtocol, host: StringConsts.domainHost, path: StringConsts.pathEndpoint, query: searchTerm)
-    println(searchURL!.absoluteString)
     
-    let sessionTask = NSURLSession.sharedSession().dataTaskWithURL(searchURL!) { (data, response, error) -> Void in
-      if let error = error {
-        AlertOnSessionError.alertPopover(searchURL!.absoluteString, withNSError: error, controller: controller)
-      } else if let httpResponse = response as? NSHTTPURLResponse {
-        let statusCode = httpResponse.statusCode
-        if !(okHTTPStatusCodeRange ~= statusCode) {
-          AlertOnSessionError.alertPopover(NSHTTPURLResponse.localizedStringForStatusCode(statusCode), withStatusCode: statusCode, controller: controller)
-        } else {
-          println(httpResponse)
-          var error: NSError?
-          var repos = [Repo]()
-          if let rootObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: &error) as? [String:AnyObject], items = rootObject[RepoJSONKeys.items] as? [[String:AnyObject]] {
-            for item in items {
-              if let repository = Repo(fromJSON: item) {
-                repos.append(repository)
-              }
-            }
+    if let searchURL = searchURL {
+      println(searchURL.absoluteString)
+      let sessionTask = NSURLSession.sharedSession().dataTaskWithURL(searchURL) { (data, response, error) -> Void in
+        if let error = error {
+          completion(nil, nil, error)
+        } else if let httpResponse = response as? NSHTTPURLResponse {
+          let statusCode = httpResponse.statusCode
+          if !(okHTTPStatusCodeRange ~= statusCode) {
+            completion(nil, statusCode, nil)
+          } else {
+            println(httpResponse)
+            completion(data, nil, nil)
           }
-          NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
-            controller.repositories = repos
-            controller.tableView.reloadData()
-           }
         }
       }
+      sessionTask.resume()
     }
-    sessionTask.resume()
   }
   
   // use of NSURLComponents suggested by NSHipster

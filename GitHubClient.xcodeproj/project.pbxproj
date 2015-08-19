@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		009EA8A41B84E47A00470F6F /* GitHubParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EA8A31B84E47A00470F6F /* GitHubParser.swift */; };
 		00A68D0D1B82E0350052D9F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A68D0C1B82E0350052D9F7 /* AppDelegate.swift */; };
 		00A68D121B82E0350052D9F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00A68D101B82E0350052D9F7 /* Main.storyboard */; };
 		00A68D141B82E0350052D9F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00A68D131B82E0350052D9F7 /* Images.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		009EA8A31B84E47A00470F6F /* GitHubParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubParser.swift; sourceTree = "<group>"; };
 		00A68D071B82E0350052D9F7 /* GitHubClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00A68D0B1B82E0350052D9F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00A68D0C1B82E0350052D9F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				00D7D5191B84421C00CA9949 /* View */,
 				00D7D5111B83AA0600CA9949 /* Controller */,
 				00A68D301B82EC630052D9F7 /* GitHubService.swift */,
+				009EA8A31B84E47A00470F6F /* GitHubParser.swift */,
 				00D7D50A1B83902900CA9949 /* AlertOnSessionError.swift */,
 				00D7D5101B83A9F500CA9949 /* Constants */,
 				00A68D0A1B82E0350052D9F7 /* Supporting Files */,
@@ -272,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00A68D0D1B82E0350052D9F7 /* AppDelegate.swift in Sources */,
+				009EA8A41B84E47A00470F6F /* GitHubParser.swift in Sources */,
 				00D7D50B1B83902900CA9949 /* AlertOnSessionError.swift in Sources */,
 				00A68D2F1B82EB440052D9F7 /* StoryboardConsts.swift in Sources */,
 				00D7D5141B83C3DA00CA9949 /* Repo.swift in Sources */,

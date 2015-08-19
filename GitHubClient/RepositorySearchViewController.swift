@@ -13,6 +13,12 @@ class RepositorySearchViewController: UIViewController {
   var repositories = [Repo]()
   
   // MARK: IBOutlets
+  
+  @IBOutlet weak var searchBar: UISearchBar! {
+    didSet {
+      searchBar.delegate = self
+    }
+  }
   @IBOutlet weak var tableView: UITableView! {
     didSet {
       tableView.delegate = self
@@ -25,12 +31,29 @@ class RepositorySearchViewController: UIViewController {
   // MARK: Lifecycle Methods
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    GitHubService.repositoriesForSearchTerm("q=test", controller: self)
   }
   
+  func searchForRepositories(stringURL: String) {
+    repositories.removeAll()
+    GitHubService.repositoriesForSearchTerm(stringURL) { (data, statusCode, error) -> Void in
+      NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+        if let error = error {
+          AlertOnSessionError.alertPopover(ErrorMessageConsts.nsURLSessionError, withNSError: error, controller: self)
+        } else if let data = data {
+          var error: NSError?
+          if let searchResultRepos = GitHubParser.reposFromData(data, error: &error) {
+            self.repositories += searchResultRepos
+          } else if let error = error {
+            AlertOnSessionError.alertPopover(ErrorMessageConsts.nsJSONSerializationError, withNSError: error, controller: self)
+          }
+        } else if let statusCode = statusCode {
+          AlertOnSessionError.alertPopover(NSHTTPURLResponse.localizedStringForStatusCode(statusCode), withStatusCode: statusCode, controller: self)
+        }
+        self.tableView.reloadData()
+      }
+    }
+  }
 }
-
 extension RepositorySearchViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return repositories.count
@@ -43,4 +66,12 @@ extension RepositorySearchViewController: UITableViewDataSource {
 }
 extension RepositorySearchViewController: UITableViewDelegate {
   
+}
+extension RepositorySearchViewController: UISearchBarDelegate {
+  func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+    if !searchBar.text.isEmpty {
+      searchForRepositories(searchBar.text)
+    }
+  }
 }
