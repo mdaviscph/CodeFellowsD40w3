@@ -10,4 +10,5 @@ import Foundation
 
 struct StoryboardConsts {
   static let MenuViewControllerToRepositoryViewControllerSegue = "ShowRepositorySearch"
+  static let RepositoryCellReuseIdentifier = "RepositoryCell"
 }

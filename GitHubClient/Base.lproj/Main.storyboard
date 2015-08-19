@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8BX-Ix-FL9">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Git Hub Menu Table View Controller-->
@@ -21,7 +22,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Repository Search" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49V-Bo-aIB">
-                                                    <rect key="frame" x="8" y="11" width="145" height="21"/>
+                                                    <rect key="frame" x="8" y="11" width="300" height="21"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -38,7 +39,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User Search" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kll-5X-ydI">
-                                                    <rect key="frame" x="8" y="11" width="97" height="21"/>
+                                                    <rect key="frame" x="8" y="11" width="300" height="21"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -66,10 +67,10 @@
             </objects>
             <point key="canvasLocation" x="1093" y="393"/>
         </scene>
-        <!--View Controller-->
+        <!--Repository Search View Controller-->
         <scene sceneID="DHO-VF-2b2">
             <objects>
-                <viewController id="Z86-5J-W0a" sceneMemberID="viewController">
+                <viewController id="Z86-5J-W0a" customClass="RepositorySearchViewController" customModule="GitHubClient" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oBF-QG-HKD"/>
                         <viewControllerLayoutGuide type="bottom" id="qac-zw-g7l"/>
@@ -78,9 +79,34 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aKu-XK-hYc">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aKu-XK-hYc">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RepositoryCell" rowHeight="140" id="oGj-wW-9jN" customClass="RepositoryCell" customModule="GitHubClient" customModuleProvider="target">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oGj-wW-9jN" id="6I0-Pw-QDd">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jg-vq-pCI">
+                                                    <rect key="frame" x="8" y="8" width="584" height="123"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2jg-vq-pCI" firstAttribute="bottom" secondItem="6I0-Pw-QDd" secondAttribute="bottomMargin" id="SLB-N8-pcA"/>
+                                                <constraint firstItem="2jg-vq-pCI" firstAttribute="leading" secondItem="6I0-Pw-QDd" secondAttribute="leadingMargin" id="a4y-dt-Swv"/>
+                                                <constraint firstItem="2jg-vq-pCI" firstAttribute="trailing" secondItem="6I0-Pw-QDd" secondAttribute="trailingMargin" id="dVd-yn-0C7"/>
+                                                <constraint firstItem="2jg-vq-pCI" firstAttribute="top" secondItem="6I0-Pw-QDd" secondAttribute="topMargin" id="oAJ-tg-NSL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="bodyLabel" destination="2jg-vq-pCI" id="Luz-v6-p8k"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -91,6 +117,9 @@
                             <constraint firstItem="qac-zw-g7l" firstAttribute="top" secondItem="aKu-XK-hYc" secondAttribute="bottom" id="xPx-vF-dPH"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="aKu-XK-hYc" id="JZt-ug-xmr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m2h-fV-g5b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
