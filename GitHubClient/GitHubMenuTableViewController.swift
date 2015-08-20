@@ -12,10 +12,59 @@ class GitHubMenuTableViewController: UITableViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    // Uncomment the following line to preserve selection between presentations
-    // clearsSelectionOnViewWillAppear = false
+    startObservingNotifications()
+    if let token = KeychainService.loadToken() {
+    } else {
+      // put this at end of queue so this VC is not considered "detached" when presenting loginVC
+      NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+        if let loginVC = self.storyboard?.instantiateViewControllerWithIdentifier(StoryboardConsts.LoginViewControllerStoryboardId) as? LoginViewController {
+          // present on navigation VC to reduce warning of unbalanced calls to transitions
+          self.navigationController?.presentViewController(loginVC, animated: true, completion: nil)
+        }
+      }
+    }
   }
   
+  private func requestAccess(stringURL: String) {
+    AuthorizationService.accessTokenUsingCodeIn(stringURL) { (data, statusCode, error) -> Void in
+      NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+        if let error = error {
+          AlertOnSessionError.alertPopover(ErrorMessageConsts.nsURLSessionError, withNSError: error, controller: self)
+        } else if let data = data {
+          var error: NSError?
+          let (token, errorDescription) = GitHubParser.tokenFromData(data, error: &error)
+          if let token = token {
+            KeychainService.saveToken(token.id)
+          } else if let error = error {
+            AlertOnSessionError.alertPopover(ErrorMessageConsts.nsJSONSerializationError, withNSError: error, controller: self)
+          } else if let errorDescription = errorDescription {
+            AlertOnSessionError.alertPopover(ErrorMessageConsts.gitHubBadCode, withDescription: errorDescription, controller: self)
+          }
+        } else if let statusCode = statusCode {
+          AlertOnSessionError.alertPopover(NSHTTPURLResponse.localizedStringForStatusCode(statusCode), withStatusCode: statusCode, controller: self)
+        }
+      }
+    }
+  }
   
+  func appDelegateNeedsOpenURL(notification: NSNotification) {
+    println("AppDelegate needs openURL")
+    if let userInfo = notification.userInfo, openURL = userInfo[StringConsts.openURLUserInfoKey] as? NSURL, stringURL = openURL.absoluteString {
+      requestAccess(stringURL)
+    }
+  }
+  
+  deinit {
+    stopObservingNotifications()
+  }
 }
+
+extension GitHubMenuTableViewController {
+  func startObservingNotifications() {
+    NSNotificationCenter.defaultCenter().addObserver(self, selector:Selector("appDelegateNeedsOpenURL:"), name: StringConsts.openURLNotificationName, object:nil)
+  }
+  func stopObservingNotifications() {
+    NSNotificationCenter.defaultCenter().removeObserver(self, name: StringConsts.openURLNotificationName, object: nil)
+  }
+}
+

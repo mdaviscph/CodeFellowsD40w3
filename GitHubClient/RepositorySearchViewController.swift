@@ -33,9 +33,9 @@ class RepositorySearchViewController: UIViewController {
     super.viewDidLoad()
   }
   
-  func searchForRepositories(stringURL: String) {
+  private func searchForRepositories(searchTerm: String) {
     repositories.removeAll()
-    GitHubService.repositoriesForSearchTerm(stringURL) { (data, statusCode, error) -> Void in
+    GitHubService.repositoriesUsingSearchTerm(searchTerm) { (data, statusCode, error) -> Void in
       NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
         if let error = error {
           AlertOnSessionError.alertPopover(ErrorMessageConsts.nsURLSessionError, withNSError: error, controller: self)

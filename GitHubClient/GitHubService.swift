@@ -11,12 +11,12 @@ import UIKit
 class GitHubService {
   
   // completion hander probably executed in background queue
-  class func repositoriesForSearchTerm(searchTerm: String, completion: (NSData?, Int?, NSError?) -> Void) {
+  class func repositoriesUsingSearchTerm(searchTerm: String, completion: (NSData?, Int?, NSError?) -> Void) {
     let okHTTPStatusCodeRange = 200...203
-    let searchURL = self.searchURL(scheme: StringConsts.schemeProtocol, host: StringConsts.domainHost, path: StringConsts.pathEndpoint, query: searchTerm)
-    
-    if let searchURL = searchURL {
+    if let searchURL = self.searchRepositoryURL(searchTerm), token = KeychainService.loadToken() as? String {
       println(searchURL.absoluteString)
+      let request = NSMutableURLRequest(URL: searchURL)
+      request.setValue(StringConsts.searchWithTokenName + token, forHTTPHeaderField: StringConsts.authorizationHeader)
       let sessionTask = NSURLSession.sharedSession().dataTaskWithURL(searchURL) { (data, response, error) -> Void in
         if let error = error {
           completion(nil, nil, error)
@@ -34,12 +34,21 @@ class GitHubService {
     }
   }
   
+  private class func searchRepositoryURL(searchTerm: String) -> NSURL? {
+    let components = NSURLComponents()
+    components.scheme = StringConsts.searchScheme
+    components.host = StringConsts.searchDomainHost
+    components.path = StringConsts.searchRepositoryPathEndpoint
+    components.queryItems = [NSURLQueryItem(name: StringConsts.searchQuery, value: searchTerm)]
+    return components.URL
+  }
+
   // use of NSURLComponents suggested by NSHipster
-  private class func searchURL(#scheme: String?, host: String?, path: String?, query: String?) -> NSURL? {
+  private class func nsURLFromComponents(#scheme: String?, host: String?, path: String?, query: String?) -> NSURL? {
     let components = NSURLComponents()
     components.scheme = scheme
-    components.percentEncodedHost = host
-    components.percentEncodedPath = path
+    components.host = host
+    components.path = path
     components.query = query
     return components.URL
   }

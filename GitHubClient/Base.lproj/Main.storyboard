@@ -5,6 +5,54 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="cXk-AT-nCU">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="nYY-XC-Iu9" customClass="LoginViewController" customModule="GitHubClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mqm-X6-LMd"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wkf-jc-KBP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kVt-H5-fuG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7W-Qd-Gd6">
+                                <rect key="frame" x="16" y="284" width="568" height="32"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <state key="normal" title="Login to GitHub">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginTapped:" destination="nYY-XC-Iu9" eventType="touchUpInside" id="aSY-XG-2pd"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explanation" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XoR-02-7Gg">
+                                <rect key="frame" x="16" y="324" width="568" height="268"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XoR-02-7Gg" firstAttribute="top" secondItem="q7W-Qd-Gd6" secondAttribute="bottom" constant="8" symbolic="YES" id="3h9-ha-amL"/>
+                            <constraint firstItem="q7W-Qd-Gd6" firstAttribute="leading" secondItem="kVt-H5-fuG" secondAttribute="leadingMargin" id="O7R-B9-fRa"/>
+                            <constraint firstItem="XoR-02-7Gg" firstAttribute="leading" secondItem="kVt-H5-fuG" secondAttribute="leadingMargin" id="U8H-cd-n26"/>
+                            <constraint firstItem="q7W-Qd-Gd6" firstAttribute="trailing" secondItem="kVt-H5-fuG" secondAttribute="trailingMargin" id="VAJ-qn-Mny"/>
+                            <constraint firstAttribute="centerY" secondItem="q7W-Qd-Gd6" secondAttribute="centerY" id="ucu-Zm-3i4"/>
+                            <constraint firstItem="XoR-02-7Gg" firstAttribute="trailing" secondItem="kVt-H5-fuG" secondAttribute="trailingMargin" id="y8L-9l-cB2"/>
+                            <constraint firstItem="Wkf-jc-KBP" firstAttribute="top" secondItem="XoR-02-7Gg" secondAttribute="bottom" constant="8" symbolic="YES" id="zHb-9B-8by"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="explanationLabel" destination="XoR-02-7Gg" id="xkG-ed-wmj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wak-Er-7BN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="725" y="-275"/>
+        </scene>
         <!--Git Hub Menu Table View Controller-->
         <scene sceneID="DiI-SX-XSo">
             <objects>

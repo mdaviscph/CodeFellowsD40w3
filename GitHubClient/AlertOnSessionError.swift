@@ -42,4 +42,13 @@ class AlertOnSessionError {
     alert.addAction(okAction)
     controller.presentViewController(alert, animated: true, completion: nil)
   }
+  class func alertPopover(title: String?, withDescription message: String, controller: UIViewController) {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+    alert.modalPresentationStyle = .Popover
+    alert.popoverPresentationController?.sourceView = controller.view
+    alert.popoverPresentationController?.sourceRect = controller.view.frame
+    let okAction = UIAlertAction(title: StringConsts.okAction, style: UIAlertActionStyle.Default, handler: nil)
+    alert.addAction(okAction)
+    controller.presentViewController(alert, animated: true, completion: nil)
+  }
 }
