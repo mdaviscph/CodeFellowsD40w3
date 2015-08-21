@@ -11,5 +11,8 @@ import Foundation
 struct StoryboardConsts {
   static let MenuViewControllerToRepositoryViewControllerSegue = "ShowRepositorySearch"
   static let RepositoryCellReuseIdentifier = "RepositoryCell"
+  static let MenuViewControllerToUserViewControllerSegue = "ShowUserSearch"
+  static let UserCellReuseIdentifier = "UserCell"
+  static let UserViewControllerToUserDetatilSeque = "ShowUserDetail"
   static let LoginViewControllerStoryboardId = "LoginViewController"
 }

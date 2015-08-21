@@ -34,11 +34,44 @@ class GitHubService {
     }
   }
   
+  // completion hander probably executed in background queue
+  class func usersUsingSearchTerm(searchTerm: String, completion: (NSData?, Int?, NSError?) -> Void) {
+    let okHTTPStatusCodeRange = 200...203
+    if let searchURL = self.searchUserURL(searchTerm), token = KeychainService.loadToken() as? String {
+      println(searchURL.absoluteString)
+      let request = NSMutableURLRequest(URL: searchURL)
+      request.setValue(StringConsts.searchWithTokenName + token, forHTTPHeaderField: StringConsts.authorizationHeader)
+      let sessionTask = NSURLSession.sharedSession().dataTaskWithURL(searchURL) { (data, response, error) -> Void in
+        if let error = error {
+          completion(nil, nil, error)
+        } else if let httpResponse = response as? NSHTTPURLResponse {
+          let statusCode = httpResponse.statusCode
+          if !(okHTTPStatusCodeRange ~= statusCode) {
+            completion(nil, statusCode, nil)
+          } else {
+            println(httpResponse)
+            completion(data, nil, nil)
+          }
+        }
+      }
+      sessionTask.resume()
+    }
+  }
+  
   private class func searchRepositoryURL(searchTerm: String) -> NSURL? {
     let components = NSURLComponents()
     components.scheme = StringConsts.searchScheme
     components.host = StringConsts.searchDomainHost
     components.path = StringConsts.searchRepositoryPathEndpoint
+    components.queryItems = [NSURLQueryItem(name: StringConsts.searchQuery, value: searchTerm)]
+    return components.URL
+  }
+  
+  private class func searchUserURL(searchTerm: String) -> NSURL? {
+    let components = NSURLComponents()
+    components.scheme = StringConsts.searchScheme
+    components.host = StringConsts.searchDomainHost
+    components.path = StringConsts.searchUsersPathEndpoint
     components.queryItems = [NSURLQueryItem(name: StringConsts.searchQuery, value: searchTerm)]
     return components.URL
   }

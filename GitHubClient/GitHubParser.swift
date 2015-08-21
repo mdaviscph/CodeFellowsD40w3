@@ -20,6 +20,17 @@ class GitHubParser {
     }
     return repos.isEmpty ? nil : repos
   }
+  class func usersFromData(data: NSData, error: NSErrorPointer) -> [User]? {
+    var users = [User]()
+    if let rootObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: error) as? [String:AnyObject], items = rootObject[UserJSONKeys.items] as? [[String:AnyObject]] {
+      for item in items {
+        if let user = User(fromJSON: item) {
+          users.append(user)
+        }
+      }
+    }
+    return users.isEmpty ? nil : users
+  }
   class func tokenFromData(data: NSData, error: NSErrorPointer) -> (Token?, String?) {
     if let items = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: error) as? [String:AnyObject] {
       GitHubParser.printSerializedDictionary(items)
@@ -33,6 +44,7 @@ class GitHubParser {
     }
     return (nil, ErrorMessageConsts.gitHubUnknownError)
   }
+  // take any serialized JSON and print to console for debug
   class func printSerializedInfo(rootObject: AnyObject?) {
     if let rootObject = rootObject as? [String:AnyObject] {
       self.printSerializedDictionary(rootObject)

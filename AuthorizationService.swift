@@ -30,7 +30,7 @@ class AuthorizationService {
           if !(okHTTPStatusCodeRange ~= statusCode) {
             completion(nil, statusCode, nil)
           } else {
-            println(httpResponse)
+            //println(httpResponse)
             completion(data, nil, nil)
           }
         }
