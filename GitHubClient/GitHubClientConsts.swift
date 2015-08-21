@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 struct StringConsts {
   static let authorizationURL = "https://github.com/login/oauth/authorize"
@@ -42,4 +43,8 @@ struct StringConsts {
 
   static let openURLNotificationName = "openURLFromGitHub"
   static let openURLUserInfoKey = "openURL"
+}
+
+struct SizeConsts {
+  static let userCellImageSize = CGSize(width: 100, height: 100)
 }

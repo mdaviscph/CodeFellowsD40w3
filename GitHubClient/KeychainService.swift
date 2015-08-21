@@ -2,8 +2,7 @@
 //  KeychainService.swift
 //  GitHubClient
 //
-//  From: Code Fellows, Brad Johnson, instructor.
-//  Copyright (c) 2015. All rights reserved.
+//  Provided By: Code Fellows, Brad Johnson, instructor.
 //
 
 import UIKit

@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000340161B86E72700A57AE9 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000340151B86E72700A57AE9 /* ImageService.swift */; };
 		0079C8C81B86352900601CC7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079C8C71B86352900601CC7 /* LoginViewController.swift */; };
 		0094DC821B86CBA00021A3EE /* UserSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094DC811B86CBA00021A3EE /* UserSearchViewController.swift */; };
 		0094DC841B86CF5C0021A3EE /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094DC831B86CF5C0021A3EE /* UserCell.swift */; };
+		0094DC861B86E0320021A3EE /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094DC851B86E0320021A3EE /* ImageResizer.swift */; };
 		009EA8A41B84E47A00470F6F /* GitHubParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EA8A31B84E47A00470F6F /* GitHubParser.swift */; };
 		009EA8A61B84F4F600470F6F /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EA8A51B84F4F600470F6F /* Keys.swift */; };
 		009EA8A81B84F5D700470F6F /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EA8A71B84F5D700470F6F /* AuthorizationService.swift */; };
@@ -43,9 +45,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		000340151B86E72700A57AE9 /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		0079C8C71B86352900601CC7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0094DC811B86CBA00021A3EE /* UserSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSearchViewController.swift; sourceTree = "<group>"; };
 		0094DC831B86CF5C0021A3EE /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		0094DC851B86E0320021A3EE /* ImageResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
 		009EA8A31B84E47A00470F6F /* GitHubParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubParser.swift; sourceTree = "<group>"; };
 		009EA8A51B84F4F600470F6F /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		009EA8A71B84F5D700470F6F /* AuthorizationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthorizationService.swift; path = ../AuthorizationService.swift; sourceTree = "<group>"; };
@@ -191,6 +195,8 @@
 				00A68D101B82E0350052D9F7 /* Main.storyboard */,
 				00D7D5171B843ED500CA9949 /* RepositoryCell.swift */,
 				0094DC831B86CF5C0021A3EE /* UserCell.swift */,
+				0094DC851B86E0320021A3EE /* ImageResizer.swift */,
+				000340151B86E72700A57AE9 /* ImageService.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -307,11 +313,13 @@
 				00D7D5141B83C3DA00CA9949 /* Repo.swift in Sources */,
 				00D7D50D1B839EAE00CA9949 /* RepositorySearchViewController.swift in Sources */,
 				00D7D50F1B83A9A200CA9949 /* ErrorMessageConsts.swift in Sources */,
+				0094DC861B86E0320021A3EE /* ImageResizer.swift in Sources */,
 				00D7D5181B843ED500CA9949 /* RepositoryCell.swift in Sources */,
 				00A68D311B82EC630052D9F7 /* GitHubService.swift in Sources */,
 				00A68D2D1B82E96B0052D9F7 /* GitHubMenuTableViewController.swift in Sources */,
 				0079C8C81B86352900601CC7 /* LoginViewController.swift in Sources */,
 				009EA8AC1B8517D000470F6F /* KeychainService.swift in Sources */,
+				000340161B86E72700A57AE9 /* ImageService.swift in Sources */,
 				00D7D5161B83C5A800CA9949 /* User.swift in Sources */,
 				00D7D5091B83884800CA9949 /* GitHubClientConsts.swift in Sources */,
 			);

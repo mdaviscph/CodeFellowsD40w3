@@ -10,6 +10,7 @@ import UIKit
 
 class UserSearchViewController: UIViewController {
   var users = [User]()
+  private var userAvatars = [String:UIImage]()
   
   // MARK: IBOutlets
   @IBOutlet weak var searchBar: UISearchBar! {
@@ -56,10 +57,30 @@ extension UserSearchViewController: UICollectionViewDataSource {
   }
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(StoryboardConsts.UserCellReuseIdentifier, forIndexPath: indexPath) as! UserCell
-    cell.user = users[indexPath.row]
+    
+    let tag = ++cell.tag
+    cell.avatarImage = nil
+    cell.hidden = false
+    
+    let user = users[indexPath.row]
+    cell.user = user
+    if let image = userAvatars[user.login] {
+      cell.avatarImage = image
+    } else {
+      let date = NSDate()
+      ImageService.sharedInstance.imageInBackground(user.avatarURL, size: SizeConsts.userCellImageSize, withRoundedCorner: UIColor.whiteColor()) { (image) -> Void in
+        NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+          if let image = image where cell.tag == tag {
+            cell.avatarImage = image
+          }
+          println(String(format: "imageInBackground in %0.4f seconds", -date.timeIntervalSinceNow))
+        }
+      }
+    }
     return cell
   }
 }
+
 extension UserSearchViewController: UICollectionViewDelegate {
   
 }

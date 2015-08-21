@@ -13,10 +13,16 @@ class UserCell: UICollectionViewCell {
   var user: User? {
     didSet {
       if let user = user {
-        nameLabel.text = user.description
+        nameLabel.text = user.login
       }
     }
   }
+  var avatarImage: UIImage? {
+    didSet {
+      imageView.image = avatarImage
+    }
+  }
   
-  @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet private weak var nameLabel: UILabel!
+  @IBOutlet private weak var imageView: UIImageView!
 }
