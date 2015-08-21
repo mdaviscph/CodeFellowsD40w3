@@ -35,8 +35,8 @@ class UserDetailViewController: UIViewController {
   }
   
   // MARK: IBOutlets
-  @IBOutlet weak var imageView: UIImageView!
-  @IBOutlet weak var bodyLabel: UILabel!
+  @IBOutlet private weak var bodyLabel: UILabel!
+  @IBOutlet weak var imageView: UIImageView!    // must leave public for ToUserDetailAnimationController.animateTransition()
 }
 
 // MARK: User Extension

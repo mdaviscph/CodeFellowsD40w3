@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		000340161B86E72700A57AE9 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000340151B86E72700A57AE9 /* ImageService.swift */; };
 		001FEA591B8783E0009F3A56 /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001FEA581B8783E0009F3A56 /* UserDetailViewController.swift */; };
+		001FEA5B1B87A3DC009F3A56 /* ToUserDetailAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001FEA5A1B87A3DC009F3A56 /* ToUserDetailAnimationController.swift */; };
 		0079C8C81B86352900601CC7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079C8C71B86352900601CC7 /* LoginViewController.swift */; };
 		0094DC821B86CBA00021A3EE /* UserSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094DC811B86CBA00021A3EE /* UserSearchViewController.swift */; };
 		0094DC841B86CF5C0021A3EE /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094DC831B86CF5C0021A3EE /* UserCell.swift */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		000340151B86E72700A57AE9 /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		001FEA581B8783E0009F3A56 /* UserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
+		001FEA5A1B87A3DC009F3A56 /* ToUserDetailAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToUserDetailAnimationController.swift; sourceTree = "<group>"; };
 		0079C8C71B86352900601CC7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0094DC811B86CBA00021A3EE /* UserSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSearchViewController.swift; sourceTree = "<group>"; };
 		0094DC831B86CF5C0021A3EE /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				00A68D2C1B82E96B0052D9F7 /* GitHubMenuTableViewController.swift */,
 				00D7D50C1B839EAE00CA9949 /* RepositorySearchViewController.swift */,
 				0094DC811B86CBA00021A3EE /* UserSearchViewController.swift */,
+				001FEA5A1B87A3DC009F3A56 /* ToUserDetailAnimationController.swift */,
 				001FEA581B8783E0009F3A56 /* UserDetailViewController.swift */,
 				009EA8A71B84F5D700470F6F /* AuthorizationService.swift */,
 				00A68D301B82EC630052D9F7 /* GitHubService.swift */,
@@ -308,6 +311,7 @@
 				009EA8A81B84F5D700470F6F /* AuthorizationService.swift in Sources */,
 				009EA8A41B84E47A00470F6F /* GitHubParser.swift in Sources */,
 				00D7D50B1B83902900CA9949 /* AlertOnSessionError.swift in Sources */,
+				001FEA5B1B87A3DC009F3A56 /* ToUserDetailAnimationController.swift in Sources */,
 				00A68D2F1B82EB440052D9F7 /* StoryboardConsts.swift in Sources */,
 				009EA8A61B84F4F600470F6F /* Keys.swift in Sources */,
 				0094DC841B86CF5C0021A3EE /* UserCell.swift in Sources */,

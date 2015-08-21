@@ -9,7 +9,11 @@
 import UIKit
 
 class UserSearchViewController: UIViewController {
+  
+  // MARK: Public Properties
   var users = [User]()
+  
+  // MARK: Private Properties
   private var userAvatars = [String:UIImage]()
   
   // MARK: IBOutlets
@@ -27,6 +31,14 @@ class UserSearchViewController: UIViewController {
   // MARK: Lifecycle Methods
   override func viewDidLoad() {
     super.viewDidLoad()
+  }
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.delegate = self
+  }
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    navigationController?.delegate = nil
   }
   
   // MARK: Private Helper Methods
@@ -101,5 +113,12 @@ extension UserSearchViewController: UISearchBarDelegate {
     if !searchBar.text.isEmpty {
       searchForUsers(searchBar.text)
     }
+  }
+}
+
+// MARK: UINavigationControllerDelegate
+extension UserSearchViewController: UINavigationControllerDelegate {
+  func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    return toVC is UserDetailViewController ? ToUserDetailAnimationController() : nil
   }
 }

@@ -27,7 +27,7 @@ class UserCell: UICollectionViewCell {
     nameLabel?.text = user?.login
     imageView?.image = avatarImage
   }
-  
+  // MARK: IBOutlets
   @IBOutlet private weak var nameLabel: UILabel!
-  @IBOutlet private weak var imageView: UIImageView!
+  @IBOutlet weak var imageView: UIImageView!      // must leave public for ToUserDetailAnimationController.animateTransition()
 }
