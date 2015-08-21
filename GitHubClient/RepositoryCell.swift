@@ -10,16 +10,23 @@ import UIKit
 
 class RepositoryCell: UITableViewCell {
   
+  // MARK: Public Properties
   var repository: Repo? {
     didSet {
-      if let repository = repository {
-        bodyLabel.attributedText = repository.attributedString
-      }
+      updateUI()
     }
   }
   
+  // MARK: Private Helper Methods
+  private func updateUI() {
+    bodyLabel?.attributedText = repository?.attributedString
+  }
+  
+  // MARK: IBOutlets
   @IBOutlet private weak var bodyLabel: UILabel!
 }
+
+// MARK: Repo Extension
 extension Repo {
   var attributedString: NSAttributedString {
     let nl = "\n"

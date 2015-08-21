@@ -238,6 +238,7 @@
                                         <connections>
                                             <outlet property="imageView" destination="6bi-gy-HZk" id="I39-mk-0eL"/>
                                             <outlet property="nameLabel" destination="j04-oM-JfQ" id="eTa-JK-Xb2"/>
+                                            <segue destination="igB-XO-ZeK" kind="show" identifier="ShowUserDetail" id="s1I-Z2-apJ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -262,6 +263,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BKh-Hn-ktb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1801" y="682"/>
+        </scene>
+        <!--User Detail View Controller-->
+        <scene sceneID="33h-L9-lWk">
+            <objects>
+                <viewController id="igB-XO-ZeK" customClass="UserDetailViewController" customModule="GitHubClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2fm-av-UP6"/>
+                        <viewControllerLayoutGuide type="bottom" id="RgM-Ek-fOc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6tU-KA-zFP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FTh-23-sAf">
+                                <rect key="frame" x="16" y="72" width="140" height="140"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="C4c-hD-0Uh"/>
+                                    <constraint firstAttribute="height" constant="140" id="qCu-tT-yFU"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjc-L4-etG">
+                                <rect key="frame" x="164" y="72" width="420" height="140"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FTh-23-sAf" firstAttribute="leading" secondItem="6tU-KA-zFP" secondAttribute="leadingMargin" id="F0S-hp-a00"/>
+                            <constraint firstItem="FTh-23-sAf" firstAttribute="top" secondItem="2fm-av-UP6" secondAttribute="bottom" constant="8" symbolic="YES" id="P0F-dM-AoU"/>
+                            <constraint firstItem="gjc-L4-etG" firstAttribute="height" relation="greaterThanOrEqual" secondItem="FTh-23-sAf" secondAttribute="height" id="dGV-Jk-B8E"/>
+                            <constraint firstItem="gjc-L4-etG" firstAttribute="leading" secondItem="FTh-23-sAf" secondAttribute="trailing" constant="8" symbolic="YES" id="fKB-gk-K1a"/>
+                            <constraint firstItem="gjc-L4-etG" firstAttribute="trailing" secondItem="6tU-KA-zFP" secondAttribute="trailingMargin" id="g2a-v2-4dn"/>
+                            <constraint firstItem="gjc-L4-etG" firstAttribute="top" secondItem="2fm-av-UP6" secondAttribute="bottom" constant="8" symbolic="YES" id="tOm-Pm-2NS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bodyLabel" destination="gjc-L4-etG" id="5Fv-OY-cSC"/>
+                        <outlet property="imageView" destination="FTh-23-sAf" id="JSM-t3-CNv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6RM-SH-qzW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2481" y="682"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QYa-ck-dPo">

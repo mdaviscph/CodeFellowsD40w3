@@ -46,5 +46,5 @@ struct StringConsts {
 }
 
 struct SizeConsts {
-  static let userCellImageSize = CGSize(width: 100, height: 100)
+  static let userAvatarImageSize = CGSize(width: 140, height: 140)
 }

@@ -10,17 +10,22 @@ import UIKit
 
 class UserCell: UICollectionViewCell {
   
+  // MARK: Public Properties
   var user: User? {
     didSet {
-      if let user = user {
-        nameLabel.text = user.login
-      }
+      updateUI()
     }
   }
   var avatarImage: UIImage? {
     didSet {
-      imageView.image = avatarImage
+      updateUI()
     }
+  }
+  
+  // MARK: Private Helper Methods
+  private func updateUI() {
+    nameLabel?.text = user?.login
+    imageView?.image = avatarImage
   }
   
   @IBOutlet private weak var nameLabel: UILabel!

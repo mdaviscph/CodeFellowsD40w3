@@ -20,7 +20,6 @@ class UserSearchViewController: UIViewController {
   }
   @IBOutlet weak var collectionView: UICollectionView! {
     didSet {
-      collectionView.delegate = self
       collectionView.dataSource = self
     }
   }
@@ -30,6 +29,7 @@ class UserSearchViewController: UIViewController {
     super.viewDidLoad()
   }
   
+  // MARK: Private Helper Methods
   private func searchForUsers(searchTerm: String) {
     users.removeAll()
     GitHubService.usersUsingSearchTerm(searchTerm) { (data, statusCode, error) -> Void in
@@ -50,7 +50,19 @@ class UserSearchViewController: UIViewController {
       }
     }
   }
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == StoryboardConsts.UserViewControllerToUserDetatilSeque, let detailVC = segue.destinationViewController as? UserDetailViewController, indexPath = collectionView.indexPathsForSelectedItems().first as? NSIndexPath {
+      let user = users[indexPath.row]
+      detailVC.user = user
+      if let image = userAvatars[user.login] {
+        detailVC.avatarImage = image
+      }
+    }
+  }
 }
+
+// MARK: UICollectionViewDataSource
 extension UserSearchViewController: UICollectionViewDataSource {
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return users.count
@@ -68,11 +80,12 @@ extension UserSearchViewController: UICollectionViewDataSource {
       cell.avatarImage = image
     } else {
       let date = NSDate()
-      ImageService.sharedInstance.imageInBackground(user.avatarURL, size: SizeConsts.userCellImageSize, withRoundedCorner: UIColor.whiteColor()) { (image) -> Void in
+      ImageService.sharedInstance.imageInBackground(user.avatarURL, size: SizeConsts.userAvatarImageSize, withRoundedCorner: UIColor.whiteColor()) { (image) -> Void in
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
           if let image = image where cell.tag == tag {
             cell.avatarImage = image
           }
+          self.userAvatars[user.login] = image
           println(String(format: "imageInBackground in %0.4f seconds", -date.timeIntervalSinceNow))
         }
       }
@@ -81,9 +94,7 @@ extension UserSearchViewController: UICollectionViewDataSource {
   }
 }
 
-extension UserSearchViewController: UICollectionViewDelegate {
-  
-}
+// MARK: UISearchBarDelegate
 extension UserSearchViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(searchBar: UISearchBar) {
     searchBar.resignFirstResponder()

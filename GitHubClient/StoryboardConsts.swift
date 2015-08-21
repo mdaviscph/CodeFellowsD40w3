@@ -14,5 +14,6 @@ struct StoryboardConsts {
   static let MenuViewControllerToUserViewControllerSegue = "ShowUserSearch"
   static let UserCellReuseIdentifier = "UserCell"
   static let UserViewControllerToUserDetatilSeque = "ShowUserDetail"
+  static let RepositoryWebViewSegue = "ShowRepositoryWebView"
   static let LoginViewControllerStoryboardId = "LoginViewController"
 }
