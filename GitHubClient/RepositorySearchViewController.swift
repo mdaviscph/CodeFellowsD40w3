@@ -41,10 +41,12 @@ class RepositorySearchViewController: UIViewController {
           AlertOnSessionError.alertPopover(ErrorMessageConsts.nsURLSessionError, withNSError: error, controller: self)
         } else if let data = data {
           var error: NSError?
-          if let searchResultRepos = GitHubParser.reposFromData(data, error: &error) {
-            self.repositories += searchResultRepos
-          } else if let error = error {
+          let searchResultRepos = GitHubParser.reposFromData(data, error: &error)
+          if let error = error {
             AlertOnSessionError.alertPopover(ErrorMessageConsts.nsJSONSerializationError, withNSError: error, controller: self)
+          }
+          else if let searchResultRepos = searchResultRepos {
+            self.repositories += searchResultRepos
           }
         } else if let statusCode = statusCode {
           AlertOnSessionError.alertPopover(NSHTTPURLResponse.localizedStringForStatusCode(statusCode), withStatusCode: statusCode, controller: self)

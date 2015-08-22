@@ -25,7 +25,7 @@ class GitHubService {
           if !(okHTTPStatusCodeRange ~= statusCode) {
             completion(nil, statusCode, nil)
           } else {
-            println(httpResponse)
+            //println(httpResponse)
             completion(data, nil, nil)
           }
         }
@@ -49,7 +49,7 @@ class GitHubService {
           if !(okHTTPStatusCodeRange ~= statusCode) {
             completion(nil, statusCode, nil)
           } else {
-            println(httpResponse)
+            //println(httpResponse)
             completion(data, nil, nil)
           }
         }

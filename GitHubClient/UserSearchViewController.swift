@@ -50,10 +50,12 @@ class UserSearchViewController: UIViewController {
           AlertOnSessionError.alertPopover(ErrorMessageConsts.nsURLSessionError, withNSError: error, controller: self)
         } else if let data = data {
           var error: NSError?
-          if let searchResultUsers = GitHubParser.usersFromData(data, error: &error) {
-            self.users += searchResultUsers
-          } else if let error = error {
+          let searchResultUsers = GitHubParser.usersFromData(data, error: &error)
+          if let error = error {
             AlertOnSessionError.alertPopover(ErrorMessageConsts.nsJSONSerializationError, withNSError: error, controller: self)
+          }
+          else if let searchResultUsers = searchResultUsers {
+            self.users += searchResultUsers
           }
         } else if let statusCode = statusCode {
           AlertOnSessionError.alertPopover(NSHTTPURLResponse.localizedStringForStatusCode(statusCode), withStatusCode: statusCode, controller: self)
