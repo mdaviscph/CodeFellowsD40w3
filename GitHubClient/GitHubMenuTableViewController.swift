@@ -10,6 +10,7 @@ import UIKit
 
 class GitHubMenuTableViewController: UITableViewController {
 
+  // MARK: Lifecycle Methods
   override func viewDidLoad() {
     super.viewDidLoad()
     startObservingNotifications()
@@ -25,6 +26,7 @@ class GitHubMenuTableViewController: UITableViewController {
     }
   }
   
+  // MARK: Private Helper Methods
   private func requestAccess(stringURL: String) {
     AuthorizationService.accessTokenUsingCodeIn(stringURL) { (data, statusCode, error) -> Void in
       NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
@@ -47,6 +49,7 @@ class GitHubMenuTableViewController: UITableViewController {
     }
   }
   
+  // MARK: Notification Selector Method
   func appDelegateNeedsOpenURL(notification: NSNotification) {
     println("AppDelegate needs openURL")
     if let userInfo = notification.userInfo, openURL = userInfo[StringConsts.openURLUserInfoKey] as? NSURL, stringURL = openURL.absoluteString {

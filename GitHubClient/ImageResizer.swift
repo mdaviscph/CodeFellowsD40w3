@@ -22,7 +22,7 @@ class ImageResizer {
     if let color = color {
       let inset = size.width/8
       let path = UIBezierPath(roundedRect: CGRectInset(rect, -inset, -inset), cornerRadius: size.width/4)
-      UIColor.whiteColor().setStroke()
+      color.setStroke()
       path.lineWidth = inset*2
       path.stroke()
     }

@@ -63,6 +63,7 @@ extension RepositorySearchViewController: UITableViewDataSource {
   }
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(StoryboardConsts.RepositoryCellReuseIdentifier, forIndexPath: indexPath) as! RepositoryCell
+    cell.backgroundColor = tableView.backgroundColor
     cell.repository = repositories[indexPath.row]
     return cell
   }
@@ -77,7 +78,6 @@ extension RepositorySearchViewController: UISearchBarDelegate {
     }
   }
   // didn't use a String extension for RegEx in order to eventually support repository search qualifiers
-  // see coding challenges homework for examples of my use of String extensions
   func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
     var error: NSError?
     let regex = NSRegularExpression(pattern: StringConsts.searchRepositoryStringRegEx, options: nil, error: &error)

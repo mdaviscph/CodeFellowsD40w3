@@ -69,6 +69,8 @@ class UserSearchViewController: UIViewController {
     if segue.identifier == StoryboardConsts.UserViewControllerToUserDetatilSeque, let detailVC = segue.destinationViewController as? UserDetailViewController, indexPath = collectionView.indexPathsForSelectedItems().first as? NSIndexPath {
       let user = users[indexPath.row]
       detailVC.user = user
+      detailVC.view.backgroundColor = collectionView.backgroundColor
+      detailVC.textView.backgroundColor = collectionView.backgroundColor
       if let image = userAvatars[user.login] {
         detailVC.avatarImage = image
       }
@@ -87,6 +89,7 @@ extension UserSearchViewController: UICollectionViewDataSource {
     let tag = ++cell.tag
     cell.avatarImage = nil
     cell.hidden = false
+    cell.backgroundColor = collectionView.backgroundColor
     
     let user = users[indexPath.row]
     cell.user = user
@@ -94,7 +97,7 @@ extension UserSearchViewController: UICollectionViewDataSource {
       cell.avatarImage = image
     } else {
       let date = NSDate()
-      ImageService.sharedInstance.imageInBackground(user.avatarURL, size: SizeConsts.userAvatarImageSize, withRoundedCorner: UIColor.whiteColor()) { (image) -> Void in
+      ImageService.sharedInstance.imageInBackground(user.avatarURL, size: SizeConsts.userAvatarImageSize, withRoundedCorner: collectionView.backgroundColor) { (image) -> Void in
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
           if let image = image where cell.tag == tag {
             cell.avatarImage = image
@@ -117,7 +120,6 @@ extension UserSearchViewController: UISearchBarDelegate {
     }
   }
   // didn't use a String extension for RegEx in order to eventually support repository search qualifiers
-  // see coding challenges homework for examples of my use of String extensions
   func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
     var error: NSError?
     let regex = NSRegularExpression(pattern: StringConsts.searchRepositoryStringRegEx, options: nil, error: &error)
