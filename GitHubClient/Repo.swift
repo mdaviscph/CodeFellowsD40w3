@@ -68,6 +68,7 @@ struct Repo {
   }
 }
 
+// MARK: Printable
 extension Repo: Printable {
   var description: String {
     let nl = "\n"
@@ -76,6 +77,7 @@ extension Repo: Printable {
   }
 }
 
+// MARK: Constant Structs
 struct RepoLabels {
   static let id = "Id: "
   static let name = "Name: "
@@ -87,7 +89,6 @@ struct RepoLabels {
   static let updatedAt = "Updated at: "
   static let language = "Language: "
 }
-
 struct RepoJSONKeys {
   static let items = "items"
   static let totalCount = "total_count"

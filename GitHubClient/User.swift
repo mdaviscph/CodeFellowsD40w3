@@ -48,6 +48,7 @@ struct User {
   }
 }
 
+// MARK: Printable
 extension User: Printable {
   var description: String {
     let nl = "\n"
@@ -56,6 +57,7 @@ extension User: Printable {
   }
 }
 
+// MARK: Constant Structs
 struct UserLabels {
   static let login = "Login: "
   static let id = "Id: "
@@ -64,7 +66,6 @@ struct UserLabels {
   static let htmlURL = "URL: "
   static let reposURL = "Repositories URL: "
 }
-
 struct UserJSONKeys {
   static let items = "items"
   static let totalCount = "total_count"

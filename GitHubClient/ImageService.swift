@@ -9,11 +9,12 @@
 import UIKit
 
 class ImageService {
-  private lazy var backgroundQueue = NSOperationQueue()
   
+  private lazy var backgroundQueue = NSOperationQueue()
   static let sharedInstance = ImageService()
+  
   private init() {
-    //backgroundQueue.maxConcurrentOperationCount = 0
+    //backgroundQueue.maxConcurrentOperationCount = 0     // uncomment if you need this for testing
   }
   
   func imageInBackground(stringURL: String, size: CGSize, withRoundedCorner color: UIColor?, completionHandler: (UIImage?) -> Void) {

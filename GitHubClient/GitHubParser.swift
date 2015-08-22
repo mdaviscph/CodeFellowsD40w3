@@ -47,6 +47,7 @@ class GitHubParser {
     return (nil, ErrorMessageConsts.gitHubUnknownError)
   }
   
+  // MARK: Helper Class Methods for Debug
   // take any serialized JSON and print to console for debug
   class func printSerializedInfo(rootObject: AnyObject?) {
     if let rootObject = rootObject as? [String:AnyObject] {

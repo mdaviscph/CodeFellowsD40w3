@@ -44,8 +44,7 @@ class UserSearchViewController: UIViewController {
   
   // MARK: Private Helper Methods
   private func searchForUsers(searchTerm: String) {
-    users.removeAll()
-    GitHubService.usersUsingSearchTerm(searchTerm) { (data, statusCode, error) -> Void in
+   GitHubService.usersUsingSearchTerm(searchTerm) { (data, statusCode, error) -> Void in
       NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
         if let error = error {
           AlertOnSessionError.alertPopover(ErrorMessageConsts.nsURLSessionError, withNSError: error, controller: self)
@@ -117,6 +116,8 @@ extension UserSearchViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
     if !searchBar.text.isEmpty {
+      users.removeAll()
+      collectionView.reloadData()         // safe way to scroll to top prior to 2nd+ search
       searchForUsers(searchBar.text)
     }
   }

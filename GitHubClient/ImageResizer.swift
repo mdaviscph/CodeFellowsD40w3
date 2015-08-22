@@ -9,8 +9,7 @@
 import UIKit
 
 class ImageResizer {
-  
-  // MARK: Class Methods
+
   class func resize(image: UIImage, size: CGSize, withRoundedCorner color: UIColor?) -> UIImage {
     // fastest way to resize an image; from nshipster.com
     // way of rounding corners is my own method

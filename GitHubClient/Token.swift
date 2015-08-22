@@ -21,6 +21,7 @@ struct Token {
   }
 }
 
+// MARK: Constant Structs
 struct TokenJSONKeys {
   static let accessToken = "access_token"
 }

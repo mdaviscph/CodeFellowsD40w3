@@ -62,6 +62,7 @@ class GitHubMenuTableViewController: UITableViewController {
   }
 }
 
+// MARK: GitHubMenuTableViewController Extension
 extension GitHubMenuTableViewController {
   func startObservingNotifications() {
     NSNotificationCenter.defaultCenter().addObserver(self, selector:Selector("appDelegateNeedsOpenURL:"), name: StringConsts.openURLNotificationName, object:nil)

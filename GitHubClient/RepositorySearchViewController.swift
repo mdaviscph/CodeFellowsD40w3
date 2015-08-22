@@ -26,16 +26,13 @@ class RepositorySearchViewController: UIViewController {
   @IBOutlet private weak var tableView: UITableView! {
     didSet {
       tableView.dataSource = self
-      //tableView.estimatedRowHeight = tableView.rowHeight
-      //tableView.rowHeight = UITableViewAutomaticDimension
+      // with a UITextView (no editing) in the cell, automatic dimension works only if you
+      // constrain the bottom of the UITextView to the bottom of the cell and disable scrolling
+      tableView.estimatedRowHeight = tableView.rowHeight
+      tableView.rowHeight = UITableViewAutomaticDimension
     }
   }
   
-  // MARK: Lifecycle Methods
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
-
   // MARK: - Navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == StoryboardConsts.RepositoryWebViewSegue, let webVC = segue.destinationViewController as? WebViewController, jumpToURL = jumpToURL {
@@ -45,7 +42,6 @@ class RepositorySearchViewController: UIViewController {
   
   // MARK: Private Helper Methods
   private func searchForRepositories(searchTerm: String) {
-    repositories.removeAll()
     GitHubService.repositoriesUsingSearchTerm(searchTerm) { (data, statusCode, error) -> Void in
       NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
         if let error = error {
@@ -76,8 +72,7 @@ extension RepositorySearchViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(StoryboardConsts.RepositoryCellReuseIdentifier, forIndexPath: indexPath) as! RepositoryCell
     cell.backgroundColor = tableView.backgroundColor
-    cell.textViewBackgroundColor = cell.backgroundColor
-    cell.textViewDelegate = self
+    cell.textViewDelegate = self      // for handling shouldInteractWithURL:
     cell.repository = repositories[indexPath.row]
     return cell
   }
@@ -88,6 +83,8 @@ extension RepositorySearchViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
     if !searchBar.text.isEmpty {
+      repositories.removeAll()
+      tableView.reloadData()        // safe way to scroll to top prior to 2nd+ search
       searchForRepositories(searchBar.text)
     }
   }

@@ -29,7 +29,6 @@ class UserDetailViewController: UIViewController {
   @IBOutlet weak var textView: UITextView! {    // leave public for setting of background color
     didSet {
       textView.delegate = self
-      textView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     }
   }
   @IBOutlet weak var imageView: UIImageView!    // must leave public for ToUserDetailAnimationController.animateTransition()
@@ -60,28 +59,20 @@ extension User {
   var attributedString: NSAttributedString {
     let nl = "\n"
     
-    let fontValue = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-    let blackValue = UIColor.blackColor()
-    let grayValue = UIColor.grayColor()
+    let loginFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+    let urlFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     
-    let labelAttribute = [NSFontAttributeName:fontValue, NSForegroundColorAttributeName:blackValue]
-    let loginLabel = NSAttributedString(string: UserLabels.login, attributes: labelAttribute)
-    let htmlURLLabel = NSAttributedString(string: UserLabels.htmlURL, attributes: labelAttribute)
-    
-    let defaultValueAttribute = [NSFontAttributeName:fontValue, NSForegroundColorAttributeName:grayValue]
-    let loginValue = NSAttributedString(string: login+nl, attributes: defaultValueAttribute)
-    var htmlURLValue = NSAttributedString()
-
+    let loginAttributes = [NSFontAttributeName:loginFont, NSForegroundColorAttributeName:UIColor.brownColor()]
+    var htmlURLAttributes = [NSFontAttributeName:urlFont,   NSForegroundColorAttributeName:UIColor.darkGrayColor()]
     if let nsHtmlURL = NSURL(string: htmlURL) {
-      htmlURLValue = NSAttributedString(string: htmlURL+nl, attributes: [NSFontAttributeName:fontValue, NSLinkAttributeName:nsHtmlURL])
-    } else {
-      htmlURLValue = NSAttributedString(string: htmlURL+nl, attributes: defaultValueAttribute)
+      htmlURLAttributes = [NSFontAttributeName:urlFont, NSLinkAttributeName:nsHtmlURL]
     }
     
-    var result = NSMutableAttributedString(attributedString: loginLabel)
-    result.appendAttributedString(loginValue)
-    result.appendAttributedString(htmlURLLabel)
-    result.appendAttributedString(htmlURLValue)
+    let loginAttrString = NSAttributedString(string: login+nl, attributes: loginAttributes)
+    let htmlURLAttrString = NSAttributedString(string: htmlURL+nl, attributes: htmlURLAttributes)
+
+    var result = NSMutableAttributedString(attributedString: loginAttrString)
+    result.appendAttributedString(htmlURLAttrString)
     return result
   }
 }
