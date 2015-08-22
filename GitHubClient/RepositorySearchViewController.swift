@@ -13,15 +13,13 @@ class RepositorySearchViewController: UIViewController {
   var repositories = [Repo]()
   
   // MARK: IBOutlets
-  
-  @IBOutlet weak var searchBar: UISearchBar! {
+  @IBOutlet private weak var searchBar: UISearchBar! {
     didSet {
       searchBar.delegate = self
     }
   }
-  @IBOutlet weak var tableView: UITableView! {
+  @IBOutlet private weak var tableView: UITableView! {
     didSet {
-      tableView.delegate = self
       tableView.dataSource = self
       tableView.estimatedRowHeight = tableView.rowHeight
       tableView.rowHeight = UITableViewAutomaticDimension
@@ -33,6 +31,7 @@ class RepositorySearchViewController: UIViewController {
     super.viewDidLoad()
   }
   
+  // MARK: Private Helper Methods
   private func searchForRepositories(searchTerm: String) {
     repositories.removeAll()
     GitHubService.repositoriesUsingSearchTerm(searchTerm) { (data, statusCode, error) -> Void in
@@ -56,6 +55,8 @@ class RepositorySearchViewController: UIViewController {
     }
   }
 }
+
+// MARK: UITableViewDataSource
 extension RepositorySearchViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return repositories.count
@@ -66,14 +67,23 @@ extension RepositorySearchViewController: UITableViewDataSource {
     return cell
   }
 }
-extension RepositorySearchViewController: UITableViewDelegate {
-  
-}
+
+// MARK: UISearchBarDelegate
 extension RepositorySearchViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
     if !searchBar.text.isEmpty {
       searchForRepositories(searchBar.text)
     }
+  }
+  // didn't use a String extension for RegEx in order to eventually support repository search qualifiers
+  // see coding challenges homework for examples of my use of String extensions
+  func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    var error: NSError?
+    let regex = NSRegularExpression(pattern: StringConsts.searchRepositoryStringRegEx, options: nil, error: &error)
+    if let matches = regex?.numberOfMatchesInString(text, options: nil, range: NSRange(location: 0, length: count(text))) {
+      return matches == 0
+    }
+    return true
   }
 }

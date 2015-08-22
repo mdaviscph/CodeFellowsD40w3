@@ -28,10 +28,12 @@ struct StringConsts {
   static let authorizationHeader = "Authorization"
   static let searchScheme = "https"
   static let searchDomainHost = "api.github.com"
-  static let searchQuery = "q"
   static let searchRepositoryPathEndpoint = "/search/repositories"
   static let searchUsersPathEndpoint = "/search/users"
   static let searchWithTokenName = "token"
+  static let searchQuery = "q"
+  static let searchRepositoryStringRegEx = "[^0-9a-zA-Z \n]"
+  static let searchUserStringRegEx = "[^0-9a-zA-Z \n]"
 
   static let getMethod = "GET"
   static let postMethod = "POST"

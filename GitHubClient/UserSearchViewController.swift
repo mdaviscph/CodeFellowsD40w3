@@ -116,6 +116,16 @@ extension UserSearchViewController: UISearchBarDelegate {
       searchForUsers(searchBar.text)
     }
   }
+  // didn't use a String extension for RegEx in order to eventually support repository search qualifiers
+  // see coding challenges homework for examples of my use of String extensions
+  func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    var error: NSError?
+    let regex = NSRegularExpression(pattern: StringConsts.searchRepositoryStringRegEx, options: nil, error: &error)
+    if let matches = regex?.numberOfMatchesInString(text, options: nil, range: NSRange(location: 0, length: count(text))) {
+      return matches == 0
+    }
+    return true
+  }
 }
 
 // MARK: UINavigationControllerDelegate
