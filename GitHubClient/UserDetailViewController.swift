@@ -29,6 +29,7 @@ class UserDetailViewController: UIViewController {
   @IBOutlet weak var textView: UITextView! {    // leave public for setting of background color
     didSet {
       textView.delegate = self
+      textView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     }
   }
   @IBOutlet weak var imageView: UIImageView!    // must leave public for ToUserDetailAnimationController.animateTransition()
@@ -59,19 +60,28 @@ extension User {
   var attributedString: NSAttributedString {
     let nl = "\n"
     
-    let loginLabel = NSAttributedString(string: UserLabels.login, attributes: [NSForegroundColorAttributeName:UIColor.blackColor()])
-    let loginValue = NSAttributedString(string: login+nl, attributes: [NSForegroundColorAttributeName:UIColor.grayColor()])
-    let htmlURLLabel = NSAttributedString(string: UserLabels.htmlURL, attributes: [NSForegroundColorAttributeName:UIColor.blackColor()])
-    let htmlURLValue = NSAttributedString(string: htmlURL+nl, attributes: [NSLinkAttributeName:htmlURL])
-    let reposURLLabel = NSAttributedString(string: UserLabels.reposURL, attributes: [NSForegroundColorAttributeName:UIColor.blackColor()])
-    let reposURLValue = NSAttributedString(string: reposURL+nl, attributes: [NSLinkAttributeName:reposURL])
+    let fontValue = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+    let blackValue = UIColor.blackColor()
+    let grayValue = UIColor.grayColor()
+    
+    let labelAttribute = [NSFontAttributeName:fontValue, NSForegroundColorAttributeName:blackValue]
+    let loginLabel = NSAttributedString(string: UserLabels.login, attributes: labelAttribute)
+    let htmlURLLabel = NSAttributedString(string: UserLabels.htmlURL, attributes: labelAttribute)
+    
+    let defaultValueAttribute = [NSFontAttributeName:fontValue, NSForegroundColorAttributeName:grayValue]
+    let loginValue = NSAttributedString(string: login+nl, attributes: defaultValueAttribute)
+    var htmlURLValue = NSAttributedString()
+
+    if let nsHtmlURL = NSURL(string: htmlURL) {
+      htmlURLValue = NSAttributedString(string: htmlURL+nl, attributes: [NSFontAttributeName:fontValue, NSLinkAttributeName:nsHtmlURL])
+    } else {
+      htmlURLValue = NSAttributedString(string: htmlURL+nl, attributes: defaultValueAttribute)
+    }
     
     var result = NSMutableAttributedString(attributedString: loginLabel)
     result.appendAttributedString(loginValue)
     result.appendAttributedString(htmlURLLabel)
     result.appendAttributedString(htmlURLValue)
-    result.appendAttributedString(reposURLLabel)
-    result.appendAttributedString(reposURLValue)
     return result
   }
 }

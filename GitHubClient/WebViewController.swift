@@ -10,21 +10,30 @@ import UIKit
 import WebKit
 
 class WebViewController: UIViewController {
-  
+
   // MARK: Public Properties
   var url: NSURL?
+
+  // MARK: Private Properties
+  var webView: WKWebView?
   
   // MARK: Lifecycle Methods
   override func viewDidLoad() {
     super.viewDidLoad()
+  }
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(true)
     
-    if let url = url {
-      let webConfig = WKWebViewConfiguration()
-      let webView = WKWebView(frame: view.bounds)
+    webView = WKWebView(frame: view.bounds)
+    if let url = url, webView = webView {
       let urlRequest = NSURLRequest(URL: url)
       if let navigation = webView.loadRequest(urlRequest) {
         view.addSubview(webView)
       }
     }
+  }
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    webView = nil
   }
 }
