@@ -10,25 +10,37 @@ import UIKit
 
 class RepositorySearchViewController: UIViewController {
 
+  // MARK: Public Properties
   var repositories = [Repo]()
   
+  // MARK: Private Properties
+  private var jumpToURL: NSURL?
+
   // MARK: IBOutlets
   @IBOutlet private weak var searchBar: UISearchBar! {
     didSet {
       searchBar.delegate = self
+      searchBar.becomeFirstResponder()
     }
   }
   @IBOutlet private weak var tableView: UITableView! {
     didSet {
       tableView.dataSource = self
-      tableView.estimatedRowHeight = tableView.rowHeight
-      tableView.rowHeight = UITableViewAutomaticDimension
+      //tableView.estimatedRowHeight = tableView.rowHeight
+      //tableView.rowHeight = UITableViewAutomaticDimension
     }
   }
   
   // MARK: Lifecycle Methods
   override func viewDidLoad() {
     super.viewDidLoad()
+  }
+
+  // MARK: - Navigation
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == StoryboardConsts.RepositoryWebViewSegue, let webVC = segue.destinationViewController as? WebViewController, jumpToURL = jumpToURL {
+      webVC.url = jumpToURL
+    }
   }
   
   // MARK: Private Helper Methods
@@ -64,6 +76,8 @@ extension RepositorySearchViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(StoryboardConsts.RepositoryCellReuseIdentifier, forIndexPath: indexPath) as! RepositoryCell
     cell.backgroundColor = tableView.backgroundColor
+    cell.textViewBackgroundColor = cell.backgroundColor
+    cell.textViewDelegate = self
     cell.repository = repositories[indexPath.row]
     return cell
   }
@@ -87,3 +101,14 @@ extension RepositorySearchViewController: UISearchBarDelegate {
     return true
   }
 }
+
+// MARK: UITextViewDelegate
+extension RepositorySearchViewController: UITextViewDelegate {
+  func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+    println("push to webView: \(URL.absoluteString!)")
+    jumpToURL = URL
+    performSegueWithIdentifier(StoryboardConsts.RepositoryWebViewSegue, sender: self)
+    return false
+  }
+}
+

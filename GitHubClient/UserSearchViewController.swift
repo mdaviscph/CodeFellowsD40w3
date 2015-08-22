@@ -20,6 +20,7 @@ class UserSearchViewController: UIViewController {
   @IBOutlet weak var searchBar: UISearchBar! {
     didSet {
       searchBar.delegate = self
+      searchBar.becomeFirstResponder()
     }
   }
   @IBOutlet weak var collectionView: UICollectionView! {

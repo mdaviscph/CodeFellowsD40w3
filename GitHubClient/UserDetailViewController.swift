@@ -86,11 +86,12 @@ extension User {
   }
 }
 
+// MARK: UITextViewDelegate
 extension UserDetailViewController: UITextViewDelegate {
   func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
     println("push to webView: \(URL.absoluteString!)")
     jumpToURL = URL
-    performSegueWithIdentifier(StoryboardConsts.RepositoryWebViewSegue, sender: self.textView)
+    performSegueWithIdentifier(StoryboardConsts.RepositoryWebViewSegue, sender: self)
     return false
   }
 }

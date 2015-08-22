@@ -148,33 +148,37 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="89" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="gAc-UO-kpN">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="148" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="gAc-UO-kpN">
                                 <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <color key="backgroundColor" red="1" green="0.75342268069999996" blue="0.73381065649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="1" green="0.75342268069999996" blue="0.73381065649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RepositoryCell" rowHeight="89" id="Edt-QI-i31" customClass="RepositoryCell" customModule="GitHubClient" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RepositoryCell" rowHeight="148" id="Edt-QI-i31" customClass="RepositoryCell" customModule="GitHubClient" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Edt-QI-i31" id="UmU-CO-nT6">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHB-Mj-qy2">
-                                                    <rect key="frame" x="8" y="8" width="584" height="72"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="752" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lma-W5-ble">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="147"/>
+                                                    <color key="backgroundColor" red="1" green="0.75342268069999996" blue="0.73381065649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="147" id="Jc6-2Q-BBU"/>
+                                                    </constraints>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
                                             </subviews>
                                             <color key="backgroundColor" red="1" green="0.75342268070970952" blue="0.73381065652464861" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstItem="sHB-Mj-qy2" firstAttribute="trailing" secondItem="UmU-CO-nT6" secondAttribute="trailingMargin" id="5ev-vf-l4R"/>
-                                                <constraint firstItem="sHB-Mj-qy2" firstAttribute="leading" secondItem="UmU-CO-nT6" secondAttribute="leadingMargin" id="BBC-4Y-ofb"/>
-                                                <constraint firstItem="sHB-Mj-qy2" firstAttribute="top" secondItem="UmU-CO-nT6" secondAttribute="topMargin" id="O2c-4C-j52"/>
-                                                <constraint firstItem="sHB-Mj-qy2" firstAttribute="bottom" secondItem="UmU-CO-nT6" secondAttribute="bottomMargin" id="u2f-cG-LRX"/>
+                                                <constraint firstItem="lma-W5-ble" firstAttribute="leading" secondItem="UmU-CO-nT6" secondAttribute="leading" id="Ct2-XU-55I"/>
+                                                <constraint firstAttribute="trailing" secondItem="lma-W5-ble" secondAttribute="trailing" id="LZc-qN-cJE"/>
+                                                <constraint firstItem="lma-W5-ble" firstAttribute="top" secondItem="UmU-CO-nT6" secondAttribute="top" id="MDo-X3-38h"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="bodyLabel" destination="sHB-Mj-qy2" id="pTN-Oi-9GY"/>
+                                            <outlet property="textView" destination="lma-W5-ble" id="2ap-fa-nSs"/>
+                                            <segue destination="BdY-hv-zff" kind="show" identifier="ShowRepositoryWebView" id="eTR-5t-3Mf"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -299,7 +303,7 @@
                                     <constraint firstAttribute="height" constant="140" id="qCu-tT-yFU"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Lm-AN-UQ6">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Lm-AN-UQ6">
                                 <rect key="frame" x="164" y="72" width="420" height="520"/>
                                 <color key="backgroundColor" red="1" green="0.84416118080000002" blue="0.54180661789999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -346,4 +350,7 @@
             <point key="canvasLocation" x="381" y="393"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="eTR-5t-3Mf"/>
+    </inferredMetricsTieBreakers>
 </document>
